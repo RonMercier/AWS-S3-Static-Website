@@ -3,7 +3,7 @@ The website can be seen here: https://ron-mercier101.com
 
 ## Architecture
 
-![Image](https://github.com/user-attachments/assets/57d6ec36-9459-4b19-ada6-85909d1a043e)
+![Image](https://github.com/user-attachments/assets/f359508a-6dee-4fea-be19-c2faae87ea18)
 
 
 ### Step 1: Create an S3 Bucket
