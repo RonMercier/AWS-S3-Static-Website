@@ -1,366 +1,220 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ron's Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="mobile-layout.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+  </head>
+  <body>
 
-<html>
-	<head>
-		<title>Ron Mercier 101</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-		<link rel="stylesheet" href="assets/css/main.css" />
-		<script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
-		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-	</head>
-	<body class="is-preload">
+    <!-- navgaition menu -->
+    <nav>
+      <div class="nav-container">
+          <div class="logo"  data-aos="zoom-in" data-aos-duration="1100">
+            Ron <span>Mercier</span>
+          </div>
+          <div class="links">
+              <div class="link" data-aos="fade-up" data-aos-duration="1100" data-aos-delay="100"><a href="#">Home</a></div>
+              <div class="link" data-aos="fade-up" data-aos-duration="1100" data-aos-delay="200"><a href="#about">About</a></div>
+              <div class="link" data-aos="fade-up" data-aos-duration="1100" data-aos-delay="300" ><a href="#skills">Skills</a></div>
+              <div class="link" data-aos="fade-up" data-aos-duration="1100" data-aos-delay="400" ><a href="#projects">Projects</a></div>
+              <div class="link" data-aos="fade-up" data-aos-duration="1100" data-aos-delay="500" ><a href="#contact">Contact</a></div>
+      </div>
+      <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
+  </div>
+      <div class="dropdown">
+          <div class="links">
+              <a href="#">Home</a>
+              <a href="#about">About</a>
+              <a href="#skills">Skills</a>
+              <a href="#projects">Projects</a>
+              <a href="#contact">Contact</a>
+              <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
+          </div>
+      </div>
+  </nav>
+  <section>
+      <div class="main-container">
+          <div class="image"  data-aos="zoom-in" data-aos-duration="2500">
+              <img src="/Assets/main.png" alt="">
+          </div>
+          <div class="content">
+              <h1 data-aos="fade-left" data-aos="fade-left" data-aos-duration="1100" data-aos-delay="700" >Hi I'm <span>Ron Mercier</span></h1>
+              <div class="typewriter"  data-aos="fade-right" data-aos-duration="1100" data-aos-delay="900" >I'm a <span class="typewriter-text"></span><label for="">|</label></div>
+              <p data-aos="flip-up" data-aos-duration="1100" data-aos-delay="1100" >This portfolio is a reflection of who I am: someone who never stops learning, never stops building, and loves turning complex ideas into simple, elegant solutions.
+              <p>Thanks for stopping by—I'm glad you're here.</p>
+              <div class="social-links">
+                  <a href="#" data-aos="zoom-out" data-aos-duration="1100" data-aos-delay="1300"><i class="fa-brands fa-github"></i></a>
+                  <a href="#"  data-aos="fade-up" data-aos-duration="1100" data-aos-delay="1400"><i class="fa-brands fa-facebook"></i></a>
+                  <a href="#"  data-aos="fade-up" data-aos-duration="1100" data-aos-delay="1500"><i class="fa-brands fa-linkedin"></i></a>
+                  <a href="#"  data-aos="fade-up" data-aos-duration="1100" data-aos-delay="1600"><i class="fa-brands fa-twitter"></i></a>
+              </div>
+              <div class="btn"  data-aos="zoom-in-left" data-aos-duration="1100" data-aos-delay="1700" >
+                  <button>Hire me</button>
+              </div>
+          </div>
+      </div>
+  </section>
 
-		<!-- Wrapper -->
-			<div id="wrapper">
 
-				<!-- Header -->
-					<header id="header">
-						<div class="logo">
-							<span class="fas fa-briefcase fa-3x"></span>
-						</div>
-						<div class="content">
-							<div class="inner">
-								<h1>Ron Mercier</h1>
-								<p style="font-weight: bold;">Cloud Engineer . Cybersecurity Analyst . IT Support Engineer</p>
-							</div>
-						</div>
-						<nav>
-							<ul style="font-weight: bold;">
-								<li><a href="#AboutMe">About Me</a></li>
-								<li><a href="#projects">Projects</a></li>
-								<li><a href="#Experience">Experience</a></li>
-								<li><a href="#contact">Contact</a></li>
-								
-							</ul>
-						</nav>
-					</header>
+  <!-- About Section Start -->
 
-				<!-- Main -->
-					<div id="main">
+  <section class="about" id="about">
+      <div class="content">
+        <div class="title" data-aos="fade-up" data-aos-duration="1100"><span>About Me</span></div>
+        <div class="about-details">
+          <div class="left" data-aos="fade-right" data-aos-duration="1100" data-aos-delay="100">
+            <img src="/Assets/main1.png" alt="" />
+          </div>
+          <div class="right" >
+            <div class="topic" data-aos="fade-left" data-aos-duration="1100" data-aos-delay="200">If you got this far, you probably want to know more.</div>
+            <p data-aos="fade-right" data-aos-duration="1100" data-aos-delay="400">
+              Well here goes: I'm a tech enthusiast, husband, father of five, and lifelong student of “why did my computer just do that?”
+              I love building things, fixing things, and occasionally breaking things just so I can fix them again (purely for educational purposes, of course). Whether I’m assembling a custom PC, navigating the cloud, or organizing the chaos that comes with a big family, I show up with curiosity, focus, and a surprising amount of calm.
+              When I’m not knee‑deep in logs, code, or hardware, you’ll probably find me watching anime, on a basketball court, reading something that makes me feel smarter, gaming, or running just far enough to pretend I’m athletic. I’m laid‑back, detail‑oriented, and persistent — the kind of person who won’t quit until the job is done or the kids need a snack… whichever comes first.
+            </p>
+            <div class="button" data-aos="fade-up" data-aos-duration="1100" data-aos-delay="600">
+              <button><a href="/Assets/Ron_Mercier.Resume.docx" download>Download CV</a></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-						<!-- About Me -->
-							<article id="AboutMe">
-								<h2 class="major">About Me</h2>
-								<div class="myBio">
-									<p>Hi, my name is Ron Mercier.  I am a Cloud, Linux and Cybersecurity enthusiast with a passion for learning, customer advocacy, and incident resolution. Proficient in Linux-based cloud platforms, Microsoft Azure, AWS, and Akamai; I specialize in resolving complex technical issues, achieving over 90% customer satisfaction. My skills include network configuration, database administration, vulnerability management, technical troubleshooting and incident response.</p>
-									
-									<p>I have a proven track record of analyzing data, enhancing system reliability, and streamlining processes. My expertise also extends to troubleshooting technical issues, creating user-focused resources, and leading projects that exceed expectations. Known for strong communication skills, I effectively translate complex technical concepts into actionable solutions for diverse audiences.</p>
-								</div>
-								<div class="container">
-									<div class="row">
-									  <div class="col">
-										<ul class="skillsLearned">
-											<lh>Current Skills:</lh>
-											<li>SQL</li>
-											<li>Web Development</li>
-											<li>Data Analysis</li>
-											<li>Incident Response</li>
-											<li>Project Management</li>
-											<li>Linux administration</li>
-											<li>Database Managment</li>
-											<li>Technical troubleshooting</li>
-											<li>Governance, Risk and Compliance</li>
-										</ul>
-									  </div>
-									  <div class="col">
-										<ul class="skillsLearned">
-											<lh>Software I used:</lh>
-											<li>AWS</li>
-											<li>Azure</li>
-											<li>GitHub</li>
-											<li>Intellij</li>
-											<li>PostgreSQL</li>
-											<li>Wireshark</li>
-											<li>Google Workspace</li>
-											<li>Visual Studio Code</li>
-											<li>Microsoft Office 365</li>
-										</ul>
-									  </div>
-									</div>
-								  </div>
-							</article>
 
-						<!-- Work -->
-							<article id="projects">
-								<h2 class="major">Projects</h2>
-								
-								
-								<section id="projects" class="work-container">
-									
-									<div class="projects-grid">
-										<a href="https://github.com/RonMercier/Java_InventoryManagementSystem" target="_blank" class="project-tile">
-										<img class="project-image" src="images/Inventory.PNG" alt="Inventory Management Application"/>
-										<hr style="margin-top: 25px;">
-										<div class="project-title">
-											<p>Inventory Manager</p>
-											<p>Language: Java</p>
-											<span></span>
-										</div>
-										</a>
-										<a href="https://github.com/RonMercier/Java-Appointment-Manager" target="_blank" class="project-tile">
-										<img class="project-image" src="images/Login.png" alt="Python-Tutorial"/>
-										<hr style="margin-top: 25px;">
-										<div class="project-title">
-											<p>Appointment Manager</p>
-											<p>Language: Java</p>
-										</div>
-										</a>
-										<a href="https://github.com/RonMercier/Python_Web_Application-Fyyur" target="_blank" class="project-tile">
-											<img class="project-image" src="images/fyyur.PNG" alt="Survey-Form"/>
-											<hr style="margin-top: 25px;">
-											<div class="project-title">
-												<p>Python Web Application</p>
-												<p>Language: Python, HTML, CSS, JavaScript</p>
-											</div>
-										</a>
-										<a href="https://github.com/RonMercier/advanced-keylogger" target="_blank" class="project-tile">
-											<img class="project-image" src="images/keylogger2.jpg" alt="Survey-Form"/>
-											<hr style="margin-top: 25px;">
-											<div class="project-title">
-												<p>Advanced Keylogger</p>
-												<p>Language: Python</p>
-											</div>
-										</a>
-									</div>
-								
-								</section>
-							</article>
+    <!-- My Skill Section Start -->
+    <section class="skills" id="skills">
+      <div class="content">
+        <div class="title" data-aos="fade-up" data-aos-duration="1100"><span>My Skills</span></div>
+        <div class="skills-details">
+          <div class="text">
+            <div class="topic" data-aos="fade-right" data-aos-duration="1100" data-aos-delay="100">Skills Reflects Our Knowledge</div>
+            <p data-aos="flip-down" data-aos-duration="1100" data-aos-delay="200">Even beyond my core tech skills, I bring a strong foundation in problem‑solving, customer support, and technical troubleshooting. I’m experienced in diagnosing issues across cloud environments, identity systems, and hardware, and I work confidently with both software and hands‑on components. With a background in scripting, documentation, and workflow optimization, I focus on keeping systems running smoothly while approaching every challenge with curiosity, persistence, and attention to detail.</p>
+            <div class="experience" data-aos="zoom-in" data-aos-duration="1100" data-aos-delay="300">
+              <div class="num">10</div>
+              <div class="exp">
+                Years Of <br />
+                Experience
+              </div>
+            </div>
+          </div>
+          <div class="boxes">
+            <div class="box" data-aos="zoom-in" data-aos-duration="1100" data-aos-delay="400">
+              <div class="topic" >Web Dev</div>
+              <div class="per" >90%</div>
+            </div>
+            <div class="box" data-aos="zoom-in" data-aos-duration="1100" data-aos-delay="500">
+              <div class="topic">Virtualization</div>
+              <div class="per">90%</div>
+            </div>
+            <div class="box" data-aos="zoom-in" data-aos-duration="1100" data-aos-delay="600">
+              <div class="topic">Security</div>
+              <div class="per" >60%</div>
+            </div>
+            <div class="box" data-aos="zoom-in" data-aos-duration="1100" data-aos-delay="700">
+              <div class="topic">Database</div>
+              <div class="per">70%</div>
+            </div>
+            <div class="box" data-aos="zoom-in" data-aos-duration="1100" data-aos-delay="700">
+              <div class="topic">Linux</div>
+              <div class="per">80%</div>
+            </div>
+            <div class="box" data-aos="zoom-in" data-aos-duration="1100" data-aos-delay="700">
+              <div class="topic">Networking</div>
+              <div class="per">70%</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-						<!-- Experience -->
-							<article id="Experience">
-								<h2 class="major">Experience</h2>
-								
-								<div class="resume_wrapper">
-									<div class="resume_left">
-									
-										<div class="resume_bottom">
-											<div class="resume_item resume_namerole">
-												<div class="name">Ron Mercier</div>
-												<div class="role">Cloud and Cybersecurity Professional</div>
-											</div>
-											<div class="resume_item resume_profile">
-												<div class="resume_title">Profile</div>
-												<div class="resume_info">Experienced Cloud Specialist with expertise in Linux-based cloud platforms, 
-													such as AWS, and Linode. Proven ability to resolve complex infrastructure issues, ensuring over 
-													90% user satisfaction. Strong foundation in computer science and cybersecurity. Adept at technical 
-													problem-solving and Customer Service.
-												</div>
-											</div>
-											
-											<div class="resume_item resume_contact">
-												<div class="resume_title">Contact</div>
-												<div class="resume_info">
-													<div class="resume_subtitle">Email</div>
-													<div class="resume_subinfo">something@example.com</div>
-												</div>
-											</div>
-											<div class="resume_item resume_skills">
-												<div class="resume_title">Skills</div>
-												<div class="resume_info">
-													<div class="skills_list">
-														<div class="skills_left">Jira</div>
-														<div class="skills_bar">
-															<p>
-																<span style="width: 70%"></span>
-															</p>
-														</div>
-													</div>
-													<div class="skills_list">
-														<div class="skills_left">SQL</div>
-														<div class="skills_bar">
-															<p>
-																<span style="width: 70%"></span>
-															</p>
-														</div>
-													</div>
-													<div class="skills_list">
-														<div class="skills_left">Linux</div>
-														<div class="skills_bar">
-															<p>
-																<span style="width: 90%"></span>
-															</p>
-														</div>
-													</div>
-													<div class="skills_list">
-														<div class="skills_left">Python</div>
-														<div class="skills_bar">
-															<p>
-																<span style="width: 75%"></span>
-															</p>
-														</div>
-													</div>
-													<div class="skills_list">
-														<div class="skills_left">Network administration and troubleshooting</div>
-														<div class="skills_bar">
-															<p>
-																<span style="width: 75%"></span>
-															</p>
-														</div>
-													</div>
-													<div class="skills_list">
-														<div class="skills_left">Database Management</div>
-														<div class="skills_bar">
-															<p>
-																<span style="width: 65%"></span>
-															</p>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="resume_right">
-										<div class="resume_item resume_namerole">
-											<div class="name">Ron Mercier</div>
-										</div>
-										<div class="resume_item resume_education">
-											<div class="resume_title">Education</div>
-											<div class="resume_info">
-												<div class="resume_data">
-													<div class="year">2023 - 2025</div>
-													<div class="content">
-														<p style="font-weight: bold;">Western Governors University</p>
-														<p>Master's degree in Cybersecurity and Information Assurance</p>
-													</div>
-												</div>
-												<div class="resume_data">
-													<div class="year">2020 - 2021</div>
-													<div class="content">
-														<p style="font-weight: bold;">Western Governors University</p>
-														<p>Bachelor's degree in Computer Science</p>
-													</div>
-												</div>
-												
-											</div>
-										</div>
-										<div class="resume_item resume_experience">
-											<div class="resume_title">Experience</div>
-											<div class="resume_info">
-												<div class="resume_data">
-													<div class="year">September 2022 - December 2024</div>
-													<div class="content">
-														<p style="font-weight: bold;">Akamai<br>
-														   Cloud Support Specialist</p>
-														<p>Resolved complex technical issues across networking, compute, managed databases, VMs, and storage for Akamai customers, achieving an over 90% satisfaction rating by providing solutions via support tickets, emails, and phone calls.</p>
-														<p>Collaborated with engineering, net ops, trust and safety, product management, and sales teams to advocate for customer needs, driving continuous improvement of cloud services and ensuring timely support to more than 500 users.</p>
-														<p>Leveraged expertise in cloud infrastructure to promptly address and troubleshoot customer issues, contributing to the development of FAQ materials and training manuals for enhancing end-user experience.</p>
-													</div>
-												</div>
-												<div class="resume_data">
-													<div class="year">January 2022 - September 2022</div>
-													<div class="content">
-														<p style="font-weight: bold;">Woven Planet - Toyota <br>
-														   Hardware Technician</p>
-														<p>Analyzed data from reliability tests, predicting hardware lifespan with 95% accuracy, enhancing product longevity.</p>
-														<p>Troubleshot system failures or bugs and provided solutions to restore functionality of hardware systems.</p>
-														<p>Maintained security conﬁguration and software in systems and networks to sustain privacy and protection from attacks.</p>
-														<p>Managed imaging and software installations on over 50 autonomous vehicles, reducing setup time by 20%.</p>
-													</div>
-												</div>
-												<div class="resume_data">
-													<div class="year">August 2016 - January 2022</div>
-													<div class="content">
-														<p style="font-weight: bold;">AT&T <br>
-														   Senior Network Technician</p>
-														<p>Installed and upgraded voice-over IP, video, and high-speed internet services, enhancing connectivity for over 500 households, achieving a 98% customer satisfaction rate.</p>
-														<p>Connected with customers to provide ﬁrst-hand demos of service features and functions.</p>
-														<p>Analyzed network performance for more than 500 residential and commercial customers, identifying and implementing improvements that enhanced speed by 20%.</p>
-														<p>Led a team of eight technicians to complete six ﬁber projects for AT&T on time and within budget and achieved 100% client satisfaction.</p>
-													</div>
-												</div>
-												
-											</div>
-										</div>
-										<div class="resume_item resmue_interests">
-											<div class="resume_title">Interests</div>
-											<div class="resume_info">
-												<div class="interests">
-													<div class="int_icon">
-														<i class="fas fa-basketball-ball"></i>
-													</div>
-													<div class="int_data">Basketball</div>
-												</div>
-												<div class="interests">
-													<div class="int_icon">
-														<i class="fas fa-book-open"></i>
-													</div>
-													<div class="int_data">Reading</div>
-												</div>
-												<div class="interests">
-													<div class="int_icon">
-														<i class="fas fa-film"></i>
-													</div>
-													<div class="int_data">Movies</div>
-												</div>
-												<div class="interests">
-													<div class="int_icon">
-														<i class="fas fa-running"></i>
-													</div>
-													<div class="int_data">Running</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</article>
+    <!-- My projects Section Start -->
+    <section class="projects" id="projects">
+      <div class="content">
+        <div class="title" data-aos="fade-up" data-aos-duration="1100"><span>My Projects</span></div>
+        <div class="boxes">
+          <a class="box" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1100" href="https://github.com/RonMercier/Java-Appointment-Manager" rel="noopener" target="_blank">
+            <div class="icon">
+              <i class="fa-solid fa-calendar"></i>
+            </div>
+            <div class="topic">Appointment Manager</div>
+            <p>Language: Java</p>
+            <p>Java application that connects and stores appointments to a MySQL database.</p>
+          </a>
+          <a class="box" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1100" href="https://github.com/RonMercier/Java_InventoryManagementSystem" rel="noopener" target="_blank">
+            <div class="icon">
+              <i class="fa-solid fa-barcode"></i>
+            </div>
+            <div class="topic">Inventory Manager</div>
+            <p>Language: Java</p>
+            <p>Java application that manages inventory for a small business.</p>
+          </a>
+          <a class="box" data-aos="fade-left" data-aos-duration="1100" data-aos-delay="100" href="https://github.com/RonMercier/Python_Web_Application-Fyyur" rel="noopener" target="_blank">
+            <div class="icon">
+              <i class="fa solid fa-computer"></i>
+            </div>
+            <div class="topic">Web Application</div>
+            <p>Language: Python, HTML/CSS, JavaScript</p>
+            <p>Responsive website for a digital marketing company.</p>
+          </a>
+          <a class="box" data-aos="fade-right" data-aos-duration="1100" data-aos-delay="300" href="https://github.com/RonMercier/advanced-keylogger" rel="noopener" target="_blank">
+            <div class="icon">
+              <i class="fa-solid fa-keyboard"></i>
+            </div>
+            <div class="topic">Advanced Keylogger</div>
+            <p>Language: Python</p>
+            <p>Advanced keylogger that logs keystrokes and emails them to a remote server.</p>
+          </a>
+          <a class="box" data-aos="fade-right" data-aos-duration="1100" data-aos-delay="300" href="https://github.com/RonMercier/AWS-S3-Static-Website" rel="noopener" target="_blank">
+            <div class="icon">
+              <i class="fa-brands fa-aws"></i>
+            </div>
+            <div class="topic">AWS S3 Static Portfolio Website</div>
+            <p>Language: HTML/CSS, JavaScript</p>
+            <p>Static portfolio website hosted on AWS S3.</p>
+          </a>
+          <a class="box" data-aos="fade-right" data-aos-duration="1100" data-aos-delay="300" href="https://github.com/RonMercier/Incident_Response_Writeup_SQLi" rel="noopener" target="_blank">
+            <div class="icon">
+              <i class="fa-solid fa-code"></i>
+            </div>
+            <div class="topic">Incident Response Writeup: SQLi</div>
+            <p>Source: LetsDefend</p>
+            <p>Incident response writeup for a SQL injection vulnerability.</p>
+          </a>
+        </div>
+      </div>
+    </section>
 
-						<!-- Contact -->
-							<article id="contact">
-								<h2 class="major">Contact</h2>
-								<form method="post" action="mailto:rmerc0047@gmail.com" enctype="text/plain">
-									<div class="fields">
-										<div class="field half">
-											<label for="name">Name</label>
-											<input type="text" name="name" id="name" />
-										</div>
-										<div class="field half">
-											<label for="email">Email</label>
-											<input type="text" name="email" id="email" />
-										</div>
-										<div class="field">
-											<label for="message">Message</label>
-											<textarea name="message" id="message" rows="4"></textarea>
-										</div>
-									</div>
-									<ul class="actions">
-										<li><input type="submit" value="Send Message" class="primary" /></li>
-										<li><input type="reset" value="Reset" /></li>
-									</ul>
-								</form>
-								<ul class="icons">
-									<li><a href="https://www.linkedin.com" class="icon brands fa-linkedin"><span class="label">LinkedIn</span></a></li>
-									
-									<li><a href="https://github.com" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
-								</ul>
-							</article>
+    <!-- Contact Me section Start -->
+    <section class="contact" id="contact">
+      <div class="content">
+        <div class="title" data-aos="fade-up" data-aos-duration="1100"><span>Contact Me</span></div>
+        <div class="text">
+          <div class="topic" data-aos="fade-right" data-aos-duration="1100" data-aos-delay="200"></div>
+          <p data-aos="fade-left" data-aos-duration="1100" data-aos-delay="400">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam neque ipsum corrupti dolores, facere numquam voluptate aspernatur sit perferendis qui nisi modi! Recusandae deserunt consequatur voluptatibus alias repellendus nobis eligendi.</p>
+          <div class="button"  data-aos="fade-up" data-aos-duration="1100" data-aos-delay="600">
+            <button>Let's Chat</button>
+          </div>
+        </div>
+      </div>
+    </section>
 
-						<!-- Elements -->
-							<article id="elements">
-								<h2 class="major">Elements</h2>
-							</article>
+    <!-- Footer Section Start -->
+    <footer >
+      <div class="text">
+        <span>Created By <a href="#">Ron Mercier</a> | Visitors: <span id="visitor-count">-</span></span>
+      </div>
+    </footer>
 
-					</div>
-
-				<!-- Footer -->
-					<footer id="footer" style="font-weight: bold;">
-						<p class="copyright"><a href="" download>Dowload my resume</a></p>
-						
-						<h5 class="copyright">Website hosted on AWS S3</h5>
-					</footer>
-
-			</div>
-
-		<!-- BG -->
-			<div id="bg"></div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
-</html>
+    
+    <script src="script.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+      AOS.init({offset:0});
+    </script>
+  </body>
+</html> 

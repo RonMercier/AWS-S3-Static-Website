@@ -1,0 +1,165 @@
+/* ==========================================================================
+   Mobile Layout Overlay 
+   Author: Ron Mercier 
+   Purpose: Improve readability, spacing, and layout on phones (≤ 500px wide)
+            without changing the existing HTML structure.
+   ========================================================================== */
+
+/* Make images fluid to prevent horizontal scrolling */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ----- Global mobile rhythm and spacing ----- */
+@media (max-width: 500px) {
+  html, body {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  section {
+    padding: 30px 10px; /* more breathing room on small screens */
+  }
+
+  /* ----- NAV & DROPDOWN ----- */
+  /* Keep the hamburger comfortably tappable and prevent overlap */
+  .hamburg {
+    top: 16px;
+    right: 16px;
+  }
+
+  /* Dropdown gets some top padding so links don't sit under the icon */
+  .dropdown {
+    padding-top: 64px;
+  }
+
+  .dropdown .links a {
+    font-size: 1.2rem;
+    padding: 18px 0; /* larger tap target */
+  }
+
+  /* ----- HERO (main-container) ----- */
+  /* Stack image above text, center-align content, remove desktop-only left padding */
+  .main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-left: 0;
+    text-align: center;
+  }
+
+  .main-container .image {
+    width: 70%;
+    height: auto;      /* avoid fixed heights that crop the image */
+    margin-bottom: 10px;
+  }
+
+  .main-container .content {
+    width: 100%;
+    padding: 0 8px;
+  }
+
+  /* Tighter, readable headings and typewriter line on phones */
+  h1 {
+    font-size: 1.6rem !important;
+  }
+
+  .typewriter {
+    font-size: 1.35rem !important;
+  }
+
+  .content p {
+    font-size: 0.95rem !important;
+  }
+
+  /* ----- ABOUT ----- */
+  .about .about-details {
+    gap: 22px;
+  }
+
+  .about .about-details .left {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .about .about-details .left img {
+    width: 80%;
+    height: auto;
+  }
+
+  .about-details .right {
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .about .right .topic {
+    font-size: 1.15rem;
+  }
+
+  /* ----- SKILLS ----- */
+  .skills .skills-details {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .skills .skills-details .text,
+  .skills .skills-details .boxes {
+    width: 100%;
+    margin: 0;
+  }
+
+  .skills-details .experience .num {
+    font-size: 2.6rem;
+  }
+
+  /* ----- PROJECTS ----- */
+  /* One column, centered cards, bigger touch area */
+  .projects .boxes {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
+
+  .projects .boxes .box {
+    width: 92% !important;
+    padding: 22px 14px;
+  }
+
+  /* ----- CONTACT ----- */
+  .contact .text {
+    width: 100%;
+    padding: 0 8px;
+  }
+
+  /* ----- FOOTER (Visitor Counter) ----- */
+  /* Stack lines so counter never collides with author line */
+  footer .text {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
+
+  footer .text span {
+    font-size: 0.95rem;
+  }
+}
+
+/* ----- Extra-small handsets (older iPhones / very narrow widths) ----- */
+@media (max-width: 380px) {
+  .social-links i {
+    width: 2.3rem;
+    height: 2.3rem;
+  }
+
+  .content button {
+    width: 100%;
+    margin-right: 0;
+  }
+}
+
