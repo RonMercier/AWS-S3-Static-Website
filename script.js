@@ -54,7 +54,7 @@ window.onload = typeWriter;
 ============================= */
 
 
-const API_INVOKE_URL = "https://1rqnx854aj.execute-api.us-east-2.amazonaws.com/Prod/count";
+const API_INVOKE_URL = "https://jlqtk7lq1c.execute-api.us-east-2.amazonaws.com/Prod/count";
 
 /** Fetch helper with timeout to avoid hanging UI */
 async function fetchWithTimeout(resource, options = {}) {
