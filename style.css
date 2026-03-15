@@ -229,6 +229,45 @@ section .main-container{
   filter: drop-shadow(0 0 10px #b74b4b);
 }
 
+/* Group the icons and the wide Hire button */
+.social-group{
+  display: inline-flex;          /* shrink-wrap to the content width (icon row) */
+  flex-direction: column;        /* icons on top, button below */
+  align-items: stretch;          /* let button stretch to the group's measured width */
+  gap: 10px;                     /* space between icons row and button */
+}
+
+/* Keep the icon row on a single line so width is stable */
+.social-group .social-links{
+  display: flex;                 /* your .social-links already behaves like a row */
+  flex-wrap: nowrap;             /* prevent wrapping so width reflects three icons */
+}
+
+/* Full-width Hire button that matches the icon row width */
+.hire-wide-btn{
+  width: 100%;                   /* match the social-group width (icon row width) */
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0.75rem 1rem;
+  border: 0.2rem solid #b74b4b;
+  border-radius: 6px;
+  color: #fff;
+  background: #b74b4b;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  transition: 0.2s linear;
+  text-decoration: none;
+  box-shadow: 0 0 0 rgba(0,0,0,0);
+}
+
+.hire-wide-btn:hover{
+  color: #b74b4b;
+  background: transparent;
+  box-shadow: 0 0 40px #b74b4b;
+}
+
 a:link, a:visited, a:hover, a:active{
   color: inherit;
   font-weight: 500;
@@ -597,5 +636,15 @@ footer .text span a:hover{
   .skills-details .boxes .per{
     font-size: 50px;
     color: #b74b4b;
+  }
+}
+
+/* Optional: tighter spacing on narrow screens */
+@media (max-width: 420px){
+  .social-group .social-links{
+    gap: 8px;
+  }
+  .hire-wide-btn{
+    padding: 0.6rem 0.75rem;
   }
 }
