@@ -1,5 +1,5 @@
 /* =============================
-   Navigation 
+   Navigation
 ============================= */
 function hamburg() {
   const navbar = document.querySelector(".dropdown");
@@ -11,7 +11,7 @@ function cancel() {
 }
 
 /* =============================
-   Typewriter 
+   Typewriter
 ============================= */
 const texts = [
   "Cloud Engineer",
@@ -48,12 +48,9 @@ function eraseText() {
 window.onload = typeWriter;
 
 /* =============================
-   Visitor Counter (updated)
-   - Uses your API Gateway endpoint only
-   - JSON expected: { "count": <number> }
+   Visitor Counter
+   - Uses API Gateway endpoint that returns JSON: { "count": <number> }
 ============================= */
-
-
 const API_INVOKE_URL = "https://1rqnx854aj.execute-api.us-east-2.amazonaws.com/count";
 
 /** Fetch helper with timeout to avoid hanging UI */
@@ -62,7 +59,11 @@ async function fetchWithTimeout(resource, options = {}) {
   const controller = new AbortController();
   const id = setTimeout(() => controller.abort(), timeout);
   try {
-    const res = await fetch(resource, { ...opts, signal: controller.signal, cache: "no-store" });
+    const res = await fetch(resource, {
+      ...opts,
+      signal: controller.signal,
+      cache: "no-store",
+    });
     return res;
   } finally {
     clearTimeout(id);
@@ -73,16 +74,13 @@ async function fetchWithTimeout(resource, options = {}) {
 async function updateVisitorCountViaApiGateway() {
   const el = document.getElementById("visitor-count");
   if (!el) return false;
-
   try {
     const res = await fetchWithTimeout(API_INVOKE_URL, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
       timeout: 7000,
     });
-
     if (!res.ok) throw new Error(`API Gateway HTTP ${res.status}`);
-
     const data = await res.json();
     if (typeof data.count === "number" && Number.isFinite(data.count)) {
       el.textContent = data.count.toLocaleString();
@@ -105,11 +103,41 @@ function updateVisitorCountViaLocalStorage() {
   el.textContent = `${current.toLocaleString()} (this browser)`;
 }
 
-/** On page load: try API → else localStorage fallback */
-document.addEventListener("DOMContentLoaded", async () => {
-  const el = document.getElementById("visitor-count");
-  if (el) el.textContent = "—"; // placeholder while loading
+/* =============================
+   "Let's Chat" button -> mailto:
+============================= */
+function wireLetsChatButton() {
+  const btn = document.getElementById("lets-chat-btn");
+  if (!btn) return;
 
+  const TO_EMAIL = "rmerc147@proton.me";
+  const SUBJECT = "Hello Ron!";
+  const BODY = [
+    "Hi Ron,",
+    "",
+    "I'd love to connect about ...",
+    "",
+    "Thanks,",
+  ].join("\n");
+
+  btn.addEventListener("click", () => {
+    const subject = encodeURIComponent(SUBJECT);
+    const body = encodeURIComponent(BODY);
+    // This will open the user's default mail client (or webmail handler)
+    window.location.href = `mailto:${TO_EMAIL}?subject=${subject}&body=${body}`;
+  });
+}
+
+/* =============================
+   On page load: initialize features
+============================= */
+document.addEventListener("DOMContentLoaded", async () => {
+  // Visitor counter
+  const counterEl = document.getElementById("visitor-count");
+  if (counterEl) counterEl.textContent = "—"; // placeholder while loading
   const ok = await updateVisitorCountViaApiGateway();
   if (!ok) updateVisitorCountViaLocalStorage();
+
+  // Wire up Let's Chat
+  wireLetsChatButton();
 });
