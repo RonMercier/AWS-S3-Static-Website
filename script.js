@@ -140,4 +140,36 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   // Wire up Let's Chat
   wireLetsChatButton();
+})
+// ---------- Back-to-Top Button ----------
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('back-to-top');
+  if (!btn) return;
+
+  // Shows the button after scrolling down a bit
+  const toggleBtn = () => {
+    
+    const threshold = 200;
+    if (window.scrollY > threshold) {
+      btn.style.display = 'inline-flex';
+    } else {
+      btn.style.display = 'none';
+    }
+  };
+
+  // Handle click for smooth scroll to top
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (prefersReduced) {
+      window.scrollTo(0, 0);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  });
+
+  // Initialize and bind events
+  toggleBtn();
+  window.addEventListener('scroll', toggleBtn, { passive: true });
 });
