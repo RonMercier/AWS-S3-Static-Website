@@ -1,6 +1,6 @@
 # AWS-S3-Static-Website
 
-![Deploy](https://github.com/RonMercier/AWS-S3-Static-Website/actions/workflows/deploy.yml/badge.svg)
+![Deploy](https://github.com/RonMercier/AWS-S3-Static-Website/actions/workflows/frontend-deploy.yml/badge.svg)
 
 **Personal portfolio website — redesigned with a SecureByDefault dark theme and deployed on AWS S3 + CloudFront with automated GitHub Actions CI/CD.**
 
