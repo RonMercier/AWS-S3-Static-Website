@@ -1,235 +1,1290 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Ron's Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="mobile-layout.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
-  </head>
-  <body>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ron Mercier — Cloud & Cybersecurity Engineer</title>
+<meta name="description" content="Cloud & Cybersecurity Engineer. DDoS mitigation, incident response, Linux infrastructure. MSc Cybersecurity · CySA+ · PenTest+ · AWS.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@600;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   TOKENS & RESET
+═══════════════════════════════════════ */
+:root {
+  --bg:        #050C18;
+  --bg2:       #071220;
+  --card:      #0A1628;
+  --card2:     #0D1E35;
+  --border:    #1A3A5C;
+  --border2:   rgba(0,212,255,0.18);
+  --cyan:      #00D4FF;
+  --cyan-dim:  #0099CC;
+  --cyan-glow: rgba(0,212,255,0.12);
+  --cyan-glow2:rgba(0,212,255,0.06);
+  --head:      #EEF5FF;
+  --body:      #8BB8D8;
+  --muted:     #4A7A9B;
+  --green:     #22D37E;
+  --warn:      #FEBC2E;
+  --red:       #FF5C5C;
 
-    <!-- navgaition menu -->
-    <nav>
-      <div class="nav-container">
-          <div class="logo"  data-aos="zoom-in" data-aos-duration="1100">
-            Ron <span>Mercier</span>
-          </div>
-          <div class="links">
-              <div class="link" data-aos="fade-up" data-aos-duration="1100" data-aos-delay="100"><a href="#">Home</a></div>
-              <div class="link" data-aos="fade-up" data-aos-duration="1100" data-aos-delay="200"><a href="#about">About</a></div>
-              <div class="link" data-aos="fade-up" data-aos-duration="1100" data-aos-delay="300" ><a href="#skills">Skills</a></div>
-              <div class="link" data-aos="fade-up" data-aos-duration="1100" data-aos-delay="400" ><a href="#projects">Projects</a></div>
-              <div class="link" data-aos="fade-up" data-aos-duration="1100" data-aos-delay="500" ><a href="#contact">Contact</a></div>
+  --font-display: 'Syne', sans-serif;
+  --font-body:    'DM Sans', sans-serif;
+  --font-mono:    'Space Mono', monospace;
+
+  --ease: cubic-bezier(0.16,1,0.3,1);
+  --r: 8px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--body);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── GRID BACKGROUND ── */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0,212,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,212,255,0.035) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+a { color: var(--cyan); text-decoration: none; }
+img { max-width: 100%; display: block; }
+section { position: relative; z-index: 1; }
+
+/* ═══════════════════════════════════════
+   NAV
+═══════════════════════════════════════ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 40px;
+  height: 64px;
+  background: rgba(5,12,24,0.85);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-brand {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--head);
+  letter-spacing: 0.02em;
+}
+.nav-brand span { color: var(--cyan); }
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--body);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--cyan); }
+
+/* ── HAMBURGER ── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+  background: none;
+  border: none;
+}
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: var(--head);
+  transition: all 0.3s var(--ease);
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 64px; left: 0; right: 0;
+  background: rgba(5,12,24,0.97);
+  border-bottom: 1px solid var(--border);
+  padding: 24px 40px 32px;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 99;
+  backdrop-filter: blur(14px);
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--body);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: color 0.2s;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+}
+.mobile-menu a:last-child { border-bottom: none; }
+.mobile-menu a:hover { color: var(--cyan); }
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 40px 80px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.hero-inner {
+  max-width: 720px;
+}
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--cyan);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.hero-eyebrow::before {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: var(--cyan);
+}
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(42px, 7vw, 80px);
+  font-weight: 800;
+  color: var(--head);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+.hero h1 .accent { color: var(--cyan); }
+.hero-title {
+  font-family: var(--font-mono);
+  font-size: clamp(14px, 2vw, 18px);
+  color: var(--body);
+  margin-bottom: 28px;
+  min-height: 28px;
+}
+.hero-title .cursor {
+  display: inline-block;
+  width: 2px;
+  height: 1.1em;
+  background: var(--cyan);
+  margin-left: 3px;
+  vertical-align: middle;
+  animation: blink 1s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+.hero-bio {
+  font-size: 17px;
+  color: var(--body);
+  line-height: 1.75;
+  max-width: 580px;
+  margin-bottom: 44px;
+}
+.hero-bio strong { color: var(--head); font-weight: 500; }
+
+.hero-cta {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  border-radius: 6px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.25s var(--ease);
+  text-decoration: none;
+  border: none;
+}
+.btn-primary {
+  background: var(--cyan);
+  color: var(--bg);
+}
+.btn-primary:hover {
+  background: #1ADFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0,212,255,0.35);
+}
+.btn-outline {
+  background: transparent;
+  color: var(--cyan);
+  border: 1.5px solid var(--cyan);
+}
+.btn-outline:hover {
+  background: var(--cyan-glow);
+  transform: translateY(-2px);
+}
+
+/* cert badges */
+.certs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 44px;
+}
+.cert {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 6px 14px;
+  border-radius: 4px;
+}
+
+/* ═══════════════════════════════════════
+   SECTION SHARED
+═══════════════════════════════════════ */
+.section-wrap {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 100px 40px;
+}
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--cyan);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.section-label::before {
+  content: '//';
+  opacity: 0.5;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 800;
+  color: var(--head);
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  line-height: 1.15;
+}
+.section-sub {
+  font-size: 16px;
+  color: var(--body);
+  max-width: 600px;
+  margin-bottom: 56px;
+  line-height: 1.7;
+}
+.divider {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--cyan) 0%, transparent 60%);
+  margin-bottom: 56px;
+  opacity: 0.35;
+}
+
+/* ═══════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════ */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+.about-text p {
+  font-size: 16px;
+  color: var(--body);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+.about-text p strong { color: var(--head); font-weight: 500; }
+.about-text p:last-child { margin-bottom: 0; }
+
+.about-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.stack-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--cyan);
+  border-radius: 0 var(--r) var(--r) 0;
+  padding: 18px 22px;
+}
+.stack-item-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--cyan);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.stack-item-value {
+  font-size: 14px;
+  color: var(--head);
+  font-weight: 500;
+}
+.stack-item-sub {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+/* ═══════════════════════════════════════
+   SKILLS
+═══════════════════════════════════════ */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+.skill-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 28px;
+  transition: border-color 0.3s, transform 0.3s var(--ease);
+}
+.skill-card:hover {
+  border-color: var(--border2);
+  transform: translateY(-4px);
+}
+.skill-icon {
+  width: 42px; height: 42px;
+  background: var(--cyan-glow);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+  font-size: 20px;
+}
+.skill-name {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--head);
+  margin-bottom: 8px;
+}
+.skill-desc {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.skill-bar-wrap {
+  height: 4px;
+  background: var(--border);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.skill-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cyan-dim), var(--cyan));
+  border-radius: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.8s var(--ease);
+}
+.skill-bar.animate { transform: scaleX(1); }
+
+/* ═══════════════════════════════════════
+   PROJECTS (GitHub Repos)
+═══════════════════════════════════════ */
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 24px;
+}
+.project-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: border-color 0.3s, transform 0.3s var(--ease), box-shadow 0.3s;
+  text-decoration: none;
+}
+.project-card:hover {
+  border-color: var(--border2);
+  transform: translateY(-5px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.4);
+  color: inherit;
+}
+.project-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.project-icon {
+  font-size: 22px;
+}
+.project-star {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.project-name {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--head);
+  line-height: 1.3;
+}
+.project-desc {
+  font-size: 13px;
+  color: var(--body);
+  line-height: 1.65;
+  flex: 1;
+}
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.project-tag {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  color: var(--cyan);
+  background: var(--cyan-glow2);
+  border: 1px solid rgba(0,212,255,0.15);
+  padding: 3px 9px;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+.project-arrow {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s, gap 0.2s;
+}
+.project-card:hover .project-arrow {
+  color: var(--cyan);
+  gap: 10px;
+}
+
+/* ═══════════════════════════════════════
+   EXPERIENCE
+═══════════════════════════════════════ */
+.exp-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.exp-item {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 28px 32px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0 28px;
+  align-items: start;
+  transition: border-color 0.3s;
+}
+.exp-item:hover { border-color: var(--border2); }
+.exp-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: var(--cyan);
+  margin-top: 6px;
+  position: relative;
+  flex-shrink: 0;
+}
+.exp-dot::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  border: 1px solid rgba(0,212,255,0.3);
+}
+.exp-role {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--head);
+  margin-bottom: 4px;
+}
+.exp-company {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--cyan);
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+.exp-period {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  margin-bottom: 12px;
+}
+.exp-desc {
+  font-size: 14px;
+  color: var(--body);
+  line-height: 1.7;
+}
+.exp-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 12px;
+}
+.exp-pill {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted);
+  background: var(--card2);
+  border: 1px solid var(--border);
+  padding: 3px 10px;
+  border-radius: 3px;
+  letter-spacing: 0.06em;
+}
+
+/* ═══════════════════════════════════════
+   CONTACT
+═══════════════════════════════════════ */
+.contact-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+.contact-text p {
+  font-size: 16px;
+  color: var(--body);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+.contact-text p strong { color: var(--head); font-weight: 500; }
+.contact-text p:last-child { margin-bottom: 32px; }
+
+.contact-links {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 18px 22px;
+  text-decoration: none;
+  transition: border-color 0.3s, transform 0.3s var(--ease);
+}
+.contact-link:hover {
+  border-color: var(--border2);
+  transform: translateX(6px);
+}
+.contact-link-icon {
+  width: 40px; height: 40px;
+  background: var(--cyan-glow);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.contact-link-text {
+  flex: 1;
+}
+.contact-link-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--muted);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 3px;
+}
+.contact-link-value {
+  font-size: 14px;
+  color: var(--head);
+  font-weight: 500;
+}
+.contact-link-arrow {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--muted);
+  transition: color 0.2s, transform 0.2s;
+}
+.contact-link:hover .contact-link-arrow {
+  color: var(--cyan);
+  transform: translateX(3px);
+}
+
+/* ═══════════════════════════════════════
+   FOOTER / VISITOR COUNTER
+═══════════════════════════════════════ */
+footer {
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid var(--border);
+  padding: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: gap;
+  gap: 20px;
+}
+.footer-copy {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--muted);
+  letter-spacing: 0.04em;
+}
+.footer-copy span { color: var(--cyan); }
+
+.visitor-counter {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r);
+  padding: 10px 18px;
+}
+.visitor-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--green);
+  animation: pulse 2.5s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 0 0 rgba(34,211,126,0.5); }
+  50% { box-shadow: 0 0 0 6px rgba(34,211,126,0); }
+}
+.visitor-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+.visitor-count {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--cyan);
+  min-width: 40px;
+  text-align: right;
+}
+.visitor-count.loading { color: var(--muted); }
+
+/* ═══════════════════════════════════════
+   FADE-IN ANIMATIONS
+═══════════════════════════════════════ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media (max-width: 768px) {
+  nav { padding: 0 20px; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+
+  .hero { padding: 100px 20px 60px; }
+  .section-wrap { padding: 72px 20px; }
+
+  .about-grid { grid-template-columns: 1fr; gap: 40px; }
+  .contact-inner { grid-template-columns: 1fr; gap: 40px; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .skills-grid { grid-template-columns: 1fr; }
+
+  footer { flex-direction: column; align-items: flex-start; padding: 24px 20px; }
+
+  .exp-item { grid-template-columns: 1fr; gap: 12px; }
+  .exp-dot { display: none; }
+
+  .mobile-menu { padding: 24px 20px 28px; }
+}
+
+@media (max-width: 480px) {
+  .hero h1 { font-size: 36px; }
+  .hero-cta { flex-direction: column; }
+  .btn { width: 100%; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <div class="nav-brand">Ron<span>.</span>Mercier</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="https://securebydefault.io" target="_blank" rel="noopener">Blog ↗</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMenu()">About</a>
+  <a href="#skills" onclick="closeMenu()">Skills</a>
+  <a href="#projects" onclick="closeMenu()">Projects</a>
+  <a href="#experience" onclick="closeMenu()">Experience</a>
+  <a href="#contact" onclick="closeMenu()">Contact</a>
+  <a href="https://securebydefault.io" target="_blank" rel="noopener">Blog ↗</a>
+</div>
+
+<!-- ══ HERO ══ -->
+<section>
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Cloud &amp; Cybersecurity Engineer</div>
+      <h1>Ron <span class="accent">Mercier</span></h1>
+      <div class="hero-title" id="typedTitle"><span class="cursor"></span></div>
+      <p class="hero-bio">
+        I work in the part of security where the alerts go off and someone has to keep the lights on.
+        <strong>Previously DDoS mitigation and incident response at Akamai.</strong>
+        Now building <strong><a href="https://securebydefault.io">SecureByDefault.io</a></strong> —
+        real attack breakdowns, vetted tools, and cybersecurity content that doesn't talk down to engineers.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">View My Work</a>
+        <a href="mailto:ron@securebydefault.io?subject=Hello%20Ron" class="btn btn-outline">Contact Me</a>
+        <a href="https://securebydefault.io" target="_blank" rel="noopener" class="btn btn-outline">SecureByDefault ↗</a>
       </div>
-      <i class="fa-solid fa-bars hamburg" onclick="hamburg()"></i>
-  </div>
-      <div class="dropdown">
-          <div class="links">
-              <a href="#">Home</a>
-              <a href="#about">About</a>
-              <a href="#skills">Skills</a>
-              <a href="#projects">Projects</a>
-              <a href="#contact">Contact</a>
-              <i class="fa-solid fa-xmark cancel" onclick="cancel()"></i>
-          </div>
+      <div class="certs">
+        <span class="cert">MSc Cybersecurity</span>
+        <span class="cert">CySA+</span>
+        <span class="cert">PenTest+</span>
+        <span class="cert">ISC2 CC</span>
+        <span class="cert">AWS CCP</span>
       </div>
-  </nav>
-  <section>
-      <div class="main-container">
-          <div class="image"  data-aos="zoom-in" data-aos-duration="2500">
-              <img src="/Assets/main.png" alt="">
-          </div>
-          <div class="content">
-              <h1 data-aos="fade-left" data-aos="fade-left" data-aos-duration="1100" data-aos-delay="700" >Hi I'm <span>Ron Mercier</span></h1>
-              <div class="typewriter"  data-aos="fade-right" data-aos-duration="1100" data-aos-delay="900" >I'm a <span class="typewriter-text"></span><label for="">|</label></div>
-              <p data-aos="flip-up" data-aos-duration="1100" data-aos-delay="1100" >This portfolio is a reflection of who I am: someone who never stops learning, never stops building, and loves turning complex ideas into simple, elegant solutions.
-              <p>Thanks for stopping by—I'm glad you're here.</p>
-              <!-- Social icons + wide Hire button -->
-              <div class="social-group" data-aos="zoom-out" data-aos-duration="1100" data-aos-delay="1300">
-                <div class="social-links">
-                  <a href="https://github.com/RonMercier/" rel="noopener" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-                  <a aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
-                  <a href="https://www.linkedin.com/in/ron-mercier/" rel="noopener" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-                </div>
-
-                <!-- Wide button; exactly matches the measured width of the icon row above -->
-                <a href="#lets-chat-btn" class="hire-wide-btn" aria-label="Hire Ron">
-                  Hire me
-                </a>
-              </div>
- <!--              <div class="btn"  data-aos="zoom-in-left" data-aos-duration="1100" data-aos-delay="1700" >
-                  <button>Hire me</button>
-              </div> -->
-          </div>
-      </div>
-  </section>
-
-
-  <!-- About Section Start -->
-
-  <section class="about" id="about">
-      <div class="content">
-        <div class="title" data-aos="fade-up" data-aos-duration="1100"><span>About Me</span></div>
-        <div class="about-details">
-          <div class="left" data-aos="fade-right" data-aos-duration="1100" data-aos-delay="100">
-            <img src="/Assets/main1.png" alt="" />
-          </div>
-          <div class="right" >
-            <div class="topic" data-aos="fade-left" data-aos-duration="1100" data-aos-delay="200">If you got this far, you probably want to know more.</div>
-            <p data-aos="fade-right" data-aos-duration="1100" data-aos-delay="400">
-              Well here goes: I'm a tech enthusiast, husband, father of five, and lifelong student of “why did my computer just do that?”
-              I love building things, fixing things, and occasionally breaking things just so I can fix them again (purely for educational purposes, of course). Whether I’m assembling a custom PC, navigating the cloud, or organizing the chaos that comes with a big family, I show up with curiosity, focus, and a surprising amount of calm.
-              When I’m not knee‑deep in logs, code, or hardware, you’ll probably find me watching anime, on a basketball court, reading something that makes me feel smarter, gaming, or running just far enough to pretend I’m athletic. I’m laid‑back, detail‑oriented, and persistent — the kind of person who won’t quit until the job is done or the kids need a snack… whichever comes first.
-            </p>
-            <div class="button" data-aos="fade-up" data-aos-duration="1100" data-aos-delay="600">
-              <button><a href="/Assets/Ron_Mercier.Resume.docx" download>Download CV</a></button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- My Skill Section Start -->
-    <section class="skills" id="skills">
-      <div class="content">
-        <div class="title" data-aos="fade-up" data-aos-duration="1100"><span>My Skills</span></div>
-        <div class="skills-details">
-          <div class="text">
-            <div class="topic" data-aos="fade-right" data-aos-duration="1100" data-aos-delay="100">Skills Reflects Our Knowledge</div>
-            <p data-aos="flip-down" data-aos-duration="1100" data-aos-delay="200">Even beyond my core tech skills, I bring a strong foundation in problem‑solving, customer support, and technical troubleshooting. I’m experienced in diagnosing issues across cloud environments, identity systems, and hardware, and I work confidently with both software and hands‑on components. With a background in scripting, documentation, and workflow optimization, I focus on keeping systems running smoothly while approaching every challenge with curiosity, persistence, and attention to detail.</p>
-            <div class="experience" data-aos="zoom-in" data-aos-duration="1100" data-aos-delay="300">
-              <div class="num">10</div>
-              <div class="exp">
-                Years Of <br />
-                Experience
-              </div>
-            </div>
-          </div>
-          <div class="boxes">
-            <div class="box" data-aos="zoom-in" data-aos-duration="1100" data-aos-delay="400">
-              <div class="topic" >Web Dev</div>
-              <div class="per" >90%</div>
-            </div>
-            <div class="box" data-aos="zoom-in" data-aos-duration="1100" data-aos-delay="500">
-              <div class="topic">Virtualization</div>
-              <div class="per">90%</div>
-            </div>
-            <div class="box" data-aos="zoom-in" data-aos-duration="1100" data-aos-delay="600">
-              <div class="topic">Security</div>
-              <div class="per" >60%</div>
-            </div>
-            <div class="box" data-aos="zoom-in" data-aos-duration="1100" data-aos-delay="700">
-              <div class="topic">Database</div>
-              <div class="per">70%</div>
-            </div>
-            <div class="box" data-aos="zoom-in" data-aos-duration="1100" data-aos-delay="700">
-              <div class="topic">Linux</div>
-              <div class="per">80%</div>
-            </div>
-            <div class="box" data-aos="zoom-in" data-aos-duration="1100" data-aos-delay="700">
-              <div class="topic">Networking</div>
-              <div class="per">70%</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- My projects Section Start -->
-    <section class="projects" id="projects">
-      <div class="content">
-        <div class="title" data-aos="fade-up" data-aos-duration="1100"><span>My Projects</span></div>
-        <div class="boxes">
-          <a class="box" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1100" href="https://github.com/RonMercier/Java-Appointment-Manager" rel="noopener" target="_blank">
-            <div class="icon">
-              <i class="fa-solid fa-calendar"></i>
-            </div>
-            <div class="topic">Appointment Manager</div>
-            <p>Language: Java</p>
-            <p>Java application that connects and stores appointments to a MySQL database.</p>
-          </a>
-          <a class="box" data-aos="fade-right" data-aos-delay="100" data-aos-duration="1100" href="https://github.com/RonMercier/Java_InventoryManagementSystem" rel="noopener" target="_blank">
-            <div class="icon">
-              <i class="fa-solid fa-barcode"></i>
-            </div>
-            <div class="topic">Inventory Manager</div>
-            <p>Language: Java</p>
-            <p>Java application that manages inventory for a small business.</p>
-          </a>
-          <a class="box" data-aos="fade-left" data-aos-duration="1100" data-aos-delay="100" href="https://github.com/RonMercier/Python_Web_Application-Fyyur" rel="noopener" target="_blank">
-            <div class="icon">
-              <i class="fa solid fa-computer"></i>
-            </div>
-            <div class="topic">Web Application</div>
-            <p>Language: Python, HTML/CSS, JavaScript</p>
-            <p>Responsive website for a digital marketing company.</p>
-          </a>
-          <a class="box" data-aos="fade-right" data-aos-duration="1100" data-aos-delay="300" href="https://github.com/RonMercier/advanced-keylogger" rel="noopener" target="_blank">
-            <div class="icon">
-              <i class="fa-solid fa-keyboard"></i>
-            </div>
-            <div class="topic">Advanced Keylogger</div>
-            <p>Language: Python</p>
-            <p>Advanced keylogger that logs keystrokes and emails them to a remote server.</p>
-          </a>
-          <a class="box" data-aos="fade-right" data-aos-duration="1100" data-aos-delay="300" href="https://github.com/RonMercier/AWS-S3-Static-Website" rel="noopener" target="_blank">
-            <div class="icon">
-              <i class="fa-brands fa-aws"></i>
-            </div>
-            <div class="topic">AWS S3 Static Portfolio Website</div>
-            <p>Language: HTML/CSS, JavaScript</p>
-            <p>Static portfolio website hosted on AWS S3.</p>
-          </a>
-          <a class="box" data-aos="fade-right" data-aos-duration="1100" data-aos-delay="300" href="https://github.com/RonMercier/Incident_Response_Writeup_SQLi" rel="noopener" target="_blank">
-            <div class="icon">
-              <i class="fa-solid fa-code"></i>
-            </div>
-            <div class="topic">Incident Response Writeup: SQLi</div>
-            <p>Source: LetsDefend</p>
-            <p>Incident response writeup for a SQL injection vulnerability.</p>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Me section Start -->
-    <section class="contact" id="contact">
-      <div class="content">
-        <div class="title" data-aos="fade-up" data-aos-duration="1100"><span>Contact Me</span></div>
-        <div class="text">
-          <div class="topic" data-aos="fade-right" data-aos-duration="1100" data-aos-delay="200"></div>
-          <p data-aos="fade-left" data-aos-duration="1100" data-aos-delay="400">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam neque ipsum corrupti dolores, facere numquam voluptate aspernatur sit perferendis qui nisi modi! Recusandae deserunt consequatur voluptatibus alias repellendus nobis eligendi.</p>
-          <div class="button"  data-aos="fade-up" data-aos-duration="1100" data-aos-delay="600">
-            <button id="lets-chat-btn" type="button" aria-label="Compose an email to Ron Mercier">Let's Chat</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Back-to-Top floating button -->
-    <div class="scroll-button">
-      <a href="#" id="back-to-top" aria-label="Back to top" title="Back to top">
-        <i class="fa-solid fa-arrow-up"></i>
-      </a>
     </div>
-    ``
+  </div>
+</section>
 
-    <!-- Footer Section Start -->
-    <footer >
-      <div class="text">
-        <span>Created By <a href="#">Ron Mercier</a> | Visitors: <span id="visitor-count">-</span></span>
+<!-- ══ ABOUT ══ -->
+<section id="about">
+  <div class="section-wrap">
+    <div class="section-label">About</div>
+    <h2 class="section-title">Engineer. Writer. Builder.</h2>
+    <div class="divider"></div>
+    <div class="about-grid fade-in">
+      <div class="about-text">
+        <p>
+          I'm a <strong>Cloud &amp; Cybersecurity Engineer</strong> based in Raleigh, NC.
+          My career has been built at the intersection of cloud infrastructure and real security work —
+          the kind where the consequences of getting it wrong are immediate and visible.
+        </p>
+        <p>
+          At <strong>Akamai Technologies</strong>, I worked on DDoS mitigation and incident response —
+          one of the companies whose literal job is absorbing attacks so other companies stay online.
+          Before that, senior network engineering at AT&amp;T, and hardware engineering at Woven by Toyota.
+        </p>
+        <p>
+          I'm also a husband, father of five, and someone who genuinely thinks cybersecurity is
+          interesting enough to write about. <strong>SecureByDefault.io</strong> is where I put
+          real attack breakdowns, honest tool reviews, and security content written for people
+          who don't need it simplified.
+        </p>
       </div>
-    </footer>
+      <div class="about-stack">
+        <div class="stack-item">
+          <div class="stack-item-label">Current Focus</div>
+          <div class="stack-item-value">Cloud Security Engineering</div>
+          <div class="stack-item-sub">Linux · AWS · DDoS mitigation · IaC</div>
+        </div>
+        <div class="stack-item">
+          <div class="stack-item-label">Base</div>
+          <div class="stack-item-value">Raleigh, North Carolina</div>
+          <div class="stack-item-sub">Available for remote and hybrid roles</div>
+        </div>
+        <div class="stack-item">
+          <div class="stack-item-label">Education</div>
+          <div class="stack-item-value">MSc Cybersecurity — WGU</div>
+          <div class="stack-item-sub">Graduated February 2026</div>
+        </div>
+        <div class="stack-item">
+          <div class="stack-item-label">Writing</div>
+          <div class="stack-item-value">SecureByDefault.io</div>
+          <div class="stack-item-sub">Real attack breakdowns · No hype</div>
+        </div>
+        <div class="stack-item">
+          <div class="stack-item-label">Open Source</div>
+          <div class="stack-item-value">6 Active Repositories</div>
+          <div class="stack-item-sub">Hardening tools · IR toolkits · Checklists</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    
-    <script src="script.js"></script>
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script>
-      AOS.init({offset:0});
-    </script>
-  </body>
-</html> 
+<!-- ══ SKILLS ══ -->
+<section id="skills">
+  <div class="section-wrap">
+    <div class="section-label">Expertise</div>
+    <h2 class="section-title">What I Work With</h2>
+    <p class="section-sub">Engineering skills built through real incident response, cloud infrastructure, and years of keeping things running under pressure.</p>
+    <div class="skills-grid">
+      <div class="skill-card fade-in">
+        <div class="skill-icon">🛡️</div>
+        <div class="skill-name">Cloud Security</div>
+        <div class="skill-desc">AWS infrastructure hardening, IAM least-privilege design, security group configuration, S3 bucket security, and cloud-native threat detection.</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="--w:0.88"></div></div>
+      </div>
+      <div class="skill-card fade-in">
+        <div class="skill-icon">🔒</div>
+        <div class="skill-name">DDoS Mitigation</div>
+        <div class="skill-desc">Real operational experience absorbing terabit-scale attacks at Akamai. Volumetric, protocol, and Layer 7 mitigation strategy and execution.</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="--w:0.90"></div></div>
+      </div>
+      <div class="skill-card fade-in">
+        <div class="skill-icon">🐧</div>
+        <div class="skill-name">Linux & Server Admin</div>
+        <div class="skill-desc">Ubuntu, Fedora/RHEL production environments. Nginx, UFW, Fail2Ban, SSH hardening, systemd, performance tuning, and infrastructure automation.</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="--w:0.92"></div></div>
+      </div>
+      <div class="skill-card fade-in">
+        <div class="skill-icon">⚡</div>
+        <div class="skill-name">Incident Response</div>
+        <div class="skill-desc">Triage, containment, forensic preservation, and post-incident reporting. CySA+ and PenTest+ certified with hands-on enterprise IR experience.</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="--w:0.85"></div></div>
+      </div>
+      <div class="skill-card fade-in">
+        <div class="skill-icon">☁️</div>
+        <div class="skill-name">AWS & IaC</div>
+        <div class="skill-desc">Lambda, DynamoDB, API Gateway, S3, CloudFront, Route 53, ACM, SAM, and CloudFormation. CI/CD via GitHub Actions with OIDC auth.</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="--w:0.82"></div></div>
+      </div>
+      <div class="skill-card fade-in">
+        <div class="skill-icon">🌐</div>
+        <div class="skill-name">Network Security</div>
+        <div class="skill-desc">Enterprise network engineering from AT&amp;T. TCP/IP, firewall architecture, WAF configuration, VPN zero trust, and network-layer threat analysis.</div>
+        <div class="skill-bar-wrap"><div class="skill-bar" style="--w:0.87"></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROJECTS ══ -->
+<section id="projects">
+  <div class="section-wrap">
+    <div class="section-label">GitHub</div>
+    <h2 class="section-title">Pinned Repositories</h2>
+    <p class="section-sub">Open-source security tools, hardening configs, and incident response resources — built from real operational experience.</p>
+    <div class="projects-grid">
+
+      <a href="https://github.com/RonMercier/securebydefault-server-hardening" target="_blank" rel="noopener" class="project-card fade-in">
+        <div class="project-card-top">
+          <div class="project-icon">🔒</div>
+          <div class="project-star">⭐ Battle-tested</div>
+        </div>
+        <div class="project-name">securebydefault-server-hardening</div>
+        <div class="project-desc">Production-grade Linux server hardening baseline — Nginx security headers, UFW deny-by-default, Fail2Ban tuned configs, SSH key-only auth, and kernel sysctl hardening. Tested against real attacks on day one.</div>
+        <div class="project-tags">
+          <span class="project-tag">Bash</span>
+          <span class="project-tag">Nginx</span>
+          <span class="project-tag">Linux</span>
+          <span class="project-tag">Fail2Ban</span>
+          <span class="project-tag">UFW</span>
+        </div>
+        <div class="project-arrow">View repository →</div>
+      </a>
+
+      <a href="https://github.com/RonMercier/cloud-security-checklist" target="_blank" rel="noopener" class="project-card fade-in">
+        <div class="project-card-top">
+          <div class="project-icon">✅</div>
+          <div class="project-star">28 items</div>
+        </div>
+        <div class="project-name">cloud-security-checklist</div>
+        <div class="project-desc">A practical, engineer-built security checklist across 6 categories: Identity & Access, Email & Phishing, Devices, Backups, Network & Cloud, and People & Process. Free PDF version available.</div>
+        <div class="project-tags">
+          <span class="project-tag">Security</span>
+          <span class="project-tag">Cloud</span>
+          <span class="project-tag">Checklist</span>
+          <span class="project-tag">Bash</span>
+        </div>
+        <div class="project-arrow">View repository →</div>
+      </a>
+
+      <a href="https://github.com/RonMercier/ddos-tabletop-toolkit" target="_blank" rel="noopener" class="project-card fade-in">
+        <div class="project-card-top">
+          <div class="project-icon">🎯</div>
+          <div class="project-star">5 scenarios</div>
+        </div>
+        <div class="project-name">ddos-tabletop-toolkit</div>
+        <div class="project-desc">Practitioner's DDoS incident response tabletop toolkit — 5 scenarios from volumetric floods to smokescreen data exfiltration. Runbooks, facilitator guides, and scorecards. Built from Akamai IR experience.</div>
+        <div class="project-tags">
+          <span class="project-tag">DDoS</span>
+          <span class="project-tag">IR</span>
+          <span class="project-tag">Tabletop</span>
+          <span class="project-tag">Blue Team</span>
+        </div>
+        <div class="project-arrow">View repository →</div>
+      </a>
+
+      <a href="https://github.com/RonMercier/cloud-resume-backend" target="_blank" rel="noopener" class="project-card fade-in">
+        <div class="project-card-top">
+          <div class="project-icon">⚡</div>
+          <div class="project-star">Python 3.12</div>
+        </div>
+        <div class="project-name">cloud-resume-backend</div>
+        <div class="project-desc">Serverless visitor counter API for the Cloud Resume Challenge. AWS Lambda + DynamoDB + API Gateway HTTP API, deployed via AWS SAM with OIDC-authenticated GitHub Actions CI/CD. No stored credentials.</div>
+        <div class="project-tags">
+          <span class="project-tag">AWS SAM</span>
+          <span class="project-tag">Lambda</span>
+          <span class="project-tag">DynamoDB</span>
+          <span class="project-tag">Python</span>
+          <span class="project-tag">OIDC</span>
+        </div>
+        <div class="project-arrow">View repository →</div>
+      </a>
+
+      <a href="https://github.com/RonMercier/AWS-S3-Static-Website" target="_blank" rel="noopener" class="project-card fade-in">
+        <div class="project-card-top">
+          <div class="project-icon">🌐</div>
+          <div class="project-star">Live site</div>
+        </div>
+        <div class="project-name">AWS-S3-Static-Website</div>
+        <div class="project-desc">Portfolio site hosted on AWS S3 with CloudFront CDN, Route 53 custom domain, ACM SSL/TLS certificate, and automated GitHub Actions CI/CD deployment. This site you're viewing now.</div>
+        <div class="project-tags">
+          <span class="project-tag">AWS S3</span>
+          <span class="project-tag">CloudFront</span>
+          <span class="project-tag">Route 53</span>
+          <span class="project-tag">CI/CD</span>
+        </div>
+        <div class="project-arrow">View repository →</div>
+      </a>
+
+      <a href="https://github.com/RonMercier/Incident_Response_Writeup_SQLi" target="_blank" rel="noopener" class="project-card fade-in">
+        <div class="project-card-top">
+          <div class="project-icon">📋</div>
+          <div class="project-star">Case study</div>
+        </div>
+        <div class="project-name">Incident Response Writeup — SQLi</div>
+        <div class="project-desc">Incident response case study documenting the detection, analysis, containment, and remediation of a SQL injection attack. Methodology, timeline, forensic evidence, and lessons learned.</div>
+        <div class="project-tags">
+          <span class="project-tag">IR</span>
+          <span class="project-tag">SQLi</span>
+          <span class="project-tag">Forensics</span>
+          <span class="project-tag">Writeup</span>
+        </div>
+        <div class="project-arrow">View repository →</div>
+      </a>
+
+    </div>
+    <div style="text-align:center;margin-top:40px;">
+      <a href="https://github.com/RonMercier" target="_blank" rel="noopener" class="btn btn-outline">View All Repositories ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ EXPERIENCE ══ -->
+<section id="experience">
+  <div class="section-wrap">
+    <div class="section-label">Experience</div>
+    <h2 class="section-title">Where I've Worked</h2>
+    <div class="divider"></div>
+    <div class="exp-list">
+
+      <div class="exp-item fade-in">
+        <div class="exp-dot"></div>
+        <div>
+          <div class="exp-role">Cloud & Cybersecurity Engineer</div>
+          <div class="exp-company">Akamai Technologies</div>
+          <div class="exp-period">3+ Years</div>
+          <div class="exp-desc">DDoS mitigation and incident response on live enterprise infrastructure. Linux cloud support for production environments serving global traffic. Hands-on triage and containment during active attack scenarios.</div>
+          <div class="exp-pills">
+            <span class="exp-pill">DDoS Mitigation</span>
+            <span class="exp-pill">Incident Response</span>
+            <span class="exp-pill">Linux</span>
+            <span class="exp-pill">Cloud Infrastructure</span>
+            <span class="exp-pill">Network Security</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item fade-in">
+        <div class="exp-dot"></div>
+        <div>
+          <div class="exp-role">Senior Network Technician</div>
+          <div class="exp-company">AT&T</div>
+          <div class="exp-period">5+ Years</div>
+          <div class="exp-desc">Senior network engineering and operations for enterprise-scale telecommunications infrastructure. Network performance analysis, fault isolation, and escalation handling for business and enterprise accounts.</div>
+          <div class="exp-pills">
+            <span class="exp-pill">Network Engineering</span>
+            <span class="exp-pill">TCP/IP</span>
+            <span class="exp-pill">Enterprise Infrastructure</span>
+            <span class="exp-pill">Operations</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="exp-item fade-in">
+        <div class="exp-dot"></div>
+        <div>
+          <div class="exp-role">Hardware Engineer</div>
+          <div class="exp-company">Woven by Toyota</div>
+          <div class="exp-period">Prior Role</div>
+          <div class="exp-desc">Hardware engineering for automotive technology systems. Hardware validation, system integration testing, and cross-functional collaboration on next-generation vehicle platforms.</div>
+          <div class="exp-pills">
+            <span class="exp-pill">Hardware Engineering</span>
+            <span class="exp-pill">Systems Integration</span>
+            <span class="exp-pill">Automotive Tech</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ CONTACT ══ -->
+<section id="contact">
+  <div class="section-wrap">
+    <div class="section-label">Contact</div>
+    <h2 class="section-title">Let's Connect</h2>
+    <div class="divider"></div>
+    <div class="contact-inner fade-in">
+      <div class="contact-text">
+        <p>
+          I'm available for <strong>cloud security consulting</strong>, contract work, and cybersecurity engineering roles.
+          I respond to every genuine message — whether that's a project inquiry, a question about something
+          I've written, or an opportunity worth discussing.
+        </p>
+        <p>
+          You can also reach me through <strong><a href="https://securebydefault.io">SecureByDefault.io</a></strong> —
+          sign up for the newsletter or drop a reply to any issue I send. I read every response.
+        </p>
+        <a href="mailto:ron@securebydefault.io?subject=Hello%20Ron" class="btn btn-primary">
+          Send Me an Email
+        </a>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:ron@securebydefault.io?subject=Hello%20Ron" class="contact-link">
+          <div class="contact-link-icon">📧</div>
+          <div class="contact-link-text">
+            <div class="contact-link-label">Email</div>
+            <div class="contact-link-value">ron@securebydefault.io</div>
+          </div>
+          <div class="contact-link-arrow">→</div>
+        </a>
+        <a href="https://www.linkedin.com/in/ron-mercier" target="_blank" rel="noopener" class="contact-link">
+          <div class="contact-link-icon">💼</div>
+          <div class="contact-link-text">
+            <div class="contact-link-label">LinkedIn</div>
+            <div class="contact-link-value">linkedin.com/in/ron-mercier</div>
+          </div>
+          <div class="contact-link-arrow">→</div>
+        </a>
+        <a href="https://github.com/RonMercier" target="_blank" rel="noopener" class="contact-link">
+          <div class="contact-link-icon">🐙</div>
+          <div class="contact-link-text">
+            <div class="contact-link-label">GitHub</div>
+            <div class="contact-link-value">github.com/RonMercier</div>
+          </div>
+          <div class="contact-link-arrow">→</div>
+        </a>
+        <a href="https://securebydefault.io" target="_blank" rel="noopener" class="contact-link">
+          <div class="contact-link-icon">🛡️</div>
+          <div class="contact-link-text">
+            <div class="contact-link-label">Security Blog</div>
+            <div class="contact-link-value">securebydefault.io</div>
+          </div>
+          <div class="contact-link-arrow">→</div>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-copy">
+    © 2026 <span>Ron Mercier</span> · Cloud &amp; Cybersecurity Engineer · Raleigh, NC
+  </div>
+  <div class="visitor-counter" id="visitorCounter">
+    <div class="visitor-dot"></div>
+    <div class="visitor-label">Visitors</div>
+    <div class="visitor-count loading" id="visitorCount">—</div>
+  </div>
+</footer>
+
+<!-- ══ JAVASCRIPT ══ -->
+<script>
+/* ── NAV HAMBURGER ── */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('open');
+  mobileMenu.classList.toggle('open');
+});
+function closeMenu() {
+  hamburger.classList.remove('open');
+  mobileMenu.classList.remove('open');
+}
+
+/* ── TYPEWRITER ── */
+const titles = [
+  'Cloud & Cybersecurity Engineer',
+  'DDoS Mitigation Specialist',
+  'Linux Infrastructure Engineer',
+  'Incident Response Engineer',
+  'AWS Serverless Builder',
+];
+let ti = 0, ci = 0, deleting = false, pauseTimer = null;
+const el = document.getElementById('typedTitle');
+
+function type() {
+  const current = titles[ti];
+  if (!deleting) {
+    ci++;
+    el.innerHTML = current.slice(0, ci) + '<span class="cursor"></span>';
+    if (ci === current.length) {
+      deleting = true;
+      clearTimeout(pauseTimer);
+      pauseTimer = setTimeout(type, 2200);
+      return;
+    }
+    setTimeout(type, 52);
+  } else {
+    ci--;
+    el.innerHTML = current.slice(0, ci) + '<span class="cursor"></span>';
+    if (ci === 0) {
+      deleting = false;
+      ti = (ti + 1) % titles.length;
+      setTimeout(type, 380);
+      return;
+    }
+    setTimeout(type, 28);
+  }
+}
+setTimeout(type, 800);
+
+/* ── SKILL BARS (Intersection Observer) ── */
+const bars = document.querySelectorAll('.skill-bar');
+const barObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      const bar = e.target;
+      const w = bar.style.getPropertyValue('--w') || '0.8';
+      bar.style.width = (parseFloat(w) * 100) + '%';
+      bar.classList.add('animate');
+      barObs.unobserve(bar);
+    }
+  });
+}, { threshold: 0.3 });
+bars.forEach(b => barObs.observe(b));
+
+/* ── FADE-IN (Intersection Observer) ── */
+const fadeObs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      e.target.style.transitionDelay = (i * 80) + 'ms';
+      e.target.classList.add('visible');
+      fadeObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => fadeObs.observe(el));
+
+/* ── VISITOR COUNTER ── */
+// Replace YOUR_API_ENDPOINT with your actual API Gateway URL from SAM outputs
+// The endpoint must match: https://{HttpApi}.execute-api.{region}.amazonaws.com/Prod/count
+const API_ENDPOINT = 'https://1rqnx854aj.execute-api.us-east-2.amazonaws.com/count';
+
+async function fetchVisitorCount() {
+  try {
+    const res = await fetch(API_ENDPOINT, {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' }
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    const countEl = document.getElementById('visitorCount');
+    countEl.classList.remove('loading');
+    // Animate the count up
+    const target = parseInt(data.count, 10);
+    let current = 0;
+    const step = Math.max(1, Math.floor(target / 40));
+    const interval = setInterval(() => {
+      current = Math.min(current + step, target);
+      countEl.textContent = current.toLocaleString();
+      if (current >= target) clearInterval(interval);
+    }, 30);
+  } catch (err) {
+    document.getElementById('visitorCount').textContent = '—';
+    console.warn('Visitor counter unavailable:', err.message);
+  }
+}
+fetchVisitorCount();
+</script>
+</body>
+</html>
