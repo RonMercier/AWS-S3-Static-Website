@@ -1396,7 +1396,7 @@ document.querySelectorAll('.fade-in').forEach(el => fadeObs.observe(el));
 /* ── VISITOR COUNTER ── */
 // Replace YOUR_API_ENDPOINT with your actual API Gateway URL from SAM outputs
 // The endpoint must match: https://{HttpApi}.execute-api.{region}.amazonaws.com/Prod/count
-const API_ENDPOINT = 'YOUR_API_ENDPOINT_HERE';
+const API_ENDPOINT = 'https://1rqnx854aj.execute-api.us-east-2.amazonaws.com/count';
 
 async function fetchVisitorCount() {
   try {
