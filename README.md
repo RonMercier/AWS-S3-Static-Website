@@ -4,6 +4,8 @@
 
 **Personal portfolio website - redesigned with a SecureByDefault dark theme and deployed on AWS S3 + CloudFront with automated GitHub Actions CI/CD.**
 
+> The AWS infrastructure behind this site (S3, CloudFront, Route 53 records) is managed with Terraform in [terraform-cloud-resume](https://github.com/RonMercier/terraform-cloud-resume). This repo owns the website files and the pipeline that publishes them.
+
 Live at: **[ron-mercier101.com](https://ron-mercier101.com)**
 
 ---
@@ -21,9 +23,24 @@ The site integrates a live visitor counter powered by a serverless backend:
 
 ---
 
-## Architecture
+## Current live architecture
 
-![Architecture diagram](assets/architecture.png)
+Verified against the Terraform configuration for the live distribution and bucket.
+
+<img width="2323" height="1811" alt="frontend-current" src="https://github.com/user-attachments/assets/cb5bc0df-88db-409c-a1a1-921a301ada09" />
+
+- **DNS:** Route 53 A and AAAA aliases for the apex and `www` point to CloudFront.
+- **CDN:** CloudFront with an ACM certificate (us-east-1), redirect to HTTPS, TLS 1.2 minimum, HTTP/1.1.
+- **Origin:** the S3 **website endpoint** over HTTP (custom origin). CloudFront adds a `Referer` header, and the bucket policy allows `s3:GetObject` when that header matches. The bucket's public access block is not enabled.
+- **Deploys:** GitHub Actions assumes an IAM role via OIDC, runs `aws s3 sync --delete` to the bucket, and invalidates the CloudFront cache.
+
+This is the setup the site was originally built with, imported into Terraform as it was. A Referer check is a weak form of access control, and moving to a private bucket is the first item below.
+
+## Planned hardening (Part 2, not deployed)
+
+<img width="2130" height="1403" alt="frontend-planned-oac" src="https://github.com/user-attachments/assets/e5964689-b2e8-4cbf-87a7-b14452b47e59" />
+
+Planned, **not live**: switch CloudFront to Origin Access Control against the S3 REST endpoint, make the bucket private (public access blocked), and remove the Referer-based policy. Until that ships, the section above is what is running.
 
 | Component | Service | Purpose |
 |---|---|---|
@@ -58,10 +75,12 @@ AWS-S3-Static-Website/
 ├── index.html                 # Complete portfolio - HTML + CSS + JS (self-contained)
 ├── assets/
 │   ├── banner.png             # Repository banner image
-│   └── architecture.png       # AWS architecture diagram
+│   ├── architecture.png       # Older diagram (predates the current-vs-planned split)
+│   ├── frontend-current.png   # Current live architecture
+│   └── frontend-planned-oac.png  # Planned hardening, not deployed
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml         # GitHub Actions CI/CD - S3 sync on push to main
+│       └── frontend-deploy.yml  # GitHub Actions CI/CD - S3 sync and CloudFront invalidation
 ├── .gitignore
 └── README.md
 ```
@@ -69,6 +88,8 @@ AWS-S3-Static-Website/
 ---
 
 ## AWS Infrastructure Setup
+
+These steps describe the intended setup using Origin Access Control, which is the **planned** design. The live site currently uses the S3 website endpoint with a Referer check (see above), and its infrastructure is managed in Terraform, not by hand.
 
 ### Prerequisites
 
@@ -108,12 +129,7 @@ AWS-S3-Static-Website/
 
 ### Step 5 - GitHub Actions CI/CD
 
-The deploy workflow syncs `index.html` and assets to S3 on every push to `main` and optionally invalidates the CloudFront cache.
-
-Create these GitHub Secrets/Variables:
-- `AWS_S3_BUCKET` - your S3 bucket name
-- `AWS_CLOUDFRONT_DISTRIBUTION_ID` - your CloudFront distribution ID
-- AWS credentials - either OIDC (recommended) or access key/secret pair
+The deploy workflow (`frontend-deploy.yml`) syncs the repository to S3 on every push to `main` (and on manual dispatch) and invalidates the CloudFront cache. It assumes an IAM role through OIDC. In this repo the bucket name, distribution ID and role ARN are written directly in the workflow file rather than stored as secrets or variables; if you fork it, replace them with your own.
 
 **Recommended: use OIDC instead of stored AWS credentials.** See the [cloud-resume-backend repo](https://github.com/RonMercier/cloud-resume-backend) for a detailed OIDC setup walkthrough.
 
@@ -132,16 +148,12 @@ const API_ENDPOINT = 'YOUR_API_ENDPOINT_HERE';
 Replace with your actual API Gateway endpoint:
 
 ```javascript
-const API_ENDPOINT = 'https://abc123.execute-api.us-east-1.amazonaws.com/Prod/count';
+const API_ENDPOINT = 'https://<api-id>.execute-api.<region>.amazonaws.com/count';
 ```
 
-Get the endpoint from SAM outputs after deploying the backend:
+The live API uses the `$default` stage, so the path is `/count`. The backend template's output URL ends in `/Prod/count`, which does not match the live API (see the backend README).
 
-```bash
-sam list stack-outputs --stack-name YOUR_STACK_NAME
-```
-
-**CORS note:** The backend SAM template has CORS locked to `https://ron-mercier101.com`. The counter will only work from that origin. Local development will show `—` in the counter — this is expected and correct behavior.
+**CORS note:** The live API allows only `https://ron-mercier101.com` and `https://securebydefault.io` (configured in Terraform). The counter will only work from those origins. Local development will show a dash in the counter, which is expected.
 
 ---
 
@@ -155,15 +167,7 @@ git commit -m "Update portfolio"
 git push origin main
 ```
 
-GitHub Actions syncs to S3. After sync, invalidate the CloudFront cache to see changes immediately:
-
-```bash
-aws cloudfront create-invalidation \
-  --distribution-id YOUR_DISTRIBUTION_ID \
-  --paths "/*"
-```
-
-Or add a cache invalidation step to your `deploy.yml` workflow so it runs automatically on every deploy.
+GitHub Actions syncs to S3 (with `--delete`, so files removed from the repo are removed from the bucket) and then invalidates the CloudFront cache automatically.
 
 ---
 
@@ -208,6 +212,7 @@ python3 -m http.server 8080
 
 ## Related Repositories
 
+- [terraform-cloud-resume](https://github.com/RonMercier/terraform-cloud-resume) - Terraform for the AWS infrastructure behind this site
 - [cloud-resume-backend](https://github.com/RonMercier/cloud-resume-backend) - Serverless visitor counter API (Lambda + DynamoDB + SAM)
 - [securebydefault-server-hardening](https://github.com/RonMercier/securebydefault-server-hardening) - Linux server hardening configs
 - [cloud-security-checklist](https://github.com/RonMercier/cloud-security-checklist) - 28-point security baseline
